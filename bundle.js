@@ -22146,12 +22146,25 @@
 	    var _this = _possibleConstructorReturn(this, (Editor.__proto__ || Object.getPrototypeOf(Editor)).call(this, props));
 
 	    _this.state = {
-	      input: ''
+	      question: '',
+	      description: ''
 	    };
 	    return _this;
 	  }
 
 	  _createClass(Editor, [{
+	    key: 'confirm',
+	    value: function confirm(e) {
+	      e.preventDefault();
+	      console.log('confirmed');
+	    }
+	  }, {
+	    key: 'discard',
+	    value: function discard(e) {
+	      e.preventDefault();
+	      console.log('discarded');
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -22159,7 +22172,7 @@
 	        { className: 'editor' },
 	        _react2.default.createElement(
 	          'form',
-	          null,
+	          { onSubmit: this.confirm.bind(this) },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'form-group' },
@@ -22177,8 +22190,25 @@
 	              'Description'
 	            ),
 	            _react2.default.createElement('input', { className: 'form-control',
-	              defaultValue: 'Description',
+	              defaultValue: this.state.description || 'Description',
 	              id: 'edit-description' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'btn-group' },
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'submit',
+	                className: 'btn btn-success btn-xs' },
+	              'Confirm'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'button',
+	                className: 'btn btn-warning btn-xs',
+	                onClick: this.discard.bind(this) },
+	              'Discard'
+	            )
 	          )
 	        )
 	      );

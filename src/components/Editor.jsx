@@ -4,14 +4,25 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: ''
+      question: '',
+      description: ''
     };
+  }
+
+  confirm(e) {
+    e.preventDefault();
+    console.log('confirmed');
+  }
+
+  discard(e) {
+    e.preventDefault();
+    console.log('discarded');
   }
 
   render() {
     return (
       <div className='editor'>
-        <form>
+        <form onSubmit={ this.confirm.bind(this) } >
           <div className='form-group'>
             <label htmlFor='edit-question'>Question</label>
             <input className='form-control'
@@ -20,9 +31,16 @@ class Editor extends Component {
             </input>
             <label htmlFor='edit-description' >Description</label>
             <input className='form-control'
-                   defaultValue={ 'Description' }
+                   defaultValue={ this.state.description || 'Description' }
                    id='edit-description' >
             </input>
+          </div>
+          <div className='btn-group'>
+            <button type='submit' 
+                    className='btn btn-success btn-xs'>Confirm</button>
+            <button type='button' 
+                    className='btn btn-warning btn-xs'
+                    onClick={ this.discard.bind(this) } >Discard</button>
           </div>
         </form>
       </div>
