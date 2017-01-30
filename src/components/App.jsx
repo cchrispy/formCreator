@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import '../styles/main.scss';
+
 import Header from './Header.jsx';
 import Form from './Form.jsx';
 
