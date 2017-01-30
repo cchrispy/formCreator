@@ -21641,7 +21641,7 @@
 	    var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
 
 	    _this.state = {
-	      questions: ["Example question 1", "Sample question #2"]
+	      questions: ["Example question: What are some activities you enjoy doing?", "Sample question: What is the meaning of life?"]
 	    };
 	    return _this;
 	  }
@@ -21660,7 +21660,7 @@
 	        'div',
 	        { id: 'form-sheet' },
 	        this.state.questions.map(function (question, i) {
-	          return _react2.default.createElement(_Box2.default, { question: question, key: i });
+	          return _react2.default.createElement(_Box2.default, { question: question, key: i, position: i });
 	        }),
 	        _react2.default.createElement(
 	          'button',
@@ -21691,6 +21691,10 @@
 	var _react = __webpack_require__(178);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _Editor = __webpack_require__(186);
+
+	var _Editor2 = _interopRequireDefault(_Editor);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21733,12 +21737,15 @@
 	          { className: 'question' },
 	          this.props.question
 	        ),
+	        !this.state.editor ? null : _react2.default.createElement(_Editor2.default, { placeholder: this.state.input }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'btn-group', role: 'group' },
 	          _react2.default.createElement(
 	            'button',
-	            { type: 'button', className: 'btn btn-xs btn-default edit' },
+	            { type: 'button',
+	              className: 'btn btn-xs btn-default edit',
+	              onClick: this.toggleEdit.bind(this) },
 	            'Edit'
 	          ),
 	          _react2.default.createElement(
@@ -21792,7 +21799,7 @@
 
 
 	// module
-	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px; }\n  .box .question {\n    font-size: 1.3em;\n    margin-bottom: 5px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n", ""]);
+	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px; }\n  .box .question {\n    font-size: 1.3em;\n    margin-bottom: 5px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n\n.editor {\n  margin: 5px 100px 10px 25px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n", ""]);
 
 	// exports
 
@@ -22104,6 +22111,63 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(178);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Editor = function (_Component) {
+	  _inherits(Editor, _Component);
+
+	  function Editor(props) {
+	    _classCallCheck(this, Editor);
+
+	    var _this = _possibleConstructorReturn(this, (Editor.__proto__ || Object.getPrototypeOf(Editor)).call(this, props));
+
+	    _this.state = {
+	      input: ''
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Editor, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'editor' },
+	        _react2.default.createElement('textarea', { className: 'form-control',
+	          defaultValue: this.props.placeholder,
+	          rows: '2',
+	          cols: '50' })
+	      );
+	    }
+	  }]);
+
+	  return Editor;
+	}(_react.Component);
+
+	exports.default = Editor;
 
 /***/ }
 /******/ ]);

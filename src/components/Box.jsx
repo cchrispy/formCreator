@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Editor from './Editor.jsx';
 
 class Box extends Component {
   constructor(props) {
@@ -19,8 +20,16 @@ class Box extends Component {
     return (
       <div className='box'>
         <div className='question'>{ this.props.question }</div>
+
+        {
+          !this.state.editor ? null : <Editor placeholder={ this.state.input } />
+        }
+
         <div className='btn-group' role='group'>
-          <button type='button' className='btn btn-xs btn-default edit'>Edit</button>
+          <button type='button'
+                  className='btn btn-xs btn-default edit'
+                  onClick={ this.toggleEdit.bind(this) } >Edit</button>
+
           <button type='button' className='btn btn-xs btn-danger delete'>
             <span className='glyphicon glyphicon-trash'></span>
           </button>

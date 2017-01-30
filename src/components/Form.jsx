@@ -6,8 +6,8 @@ class Form extends Component {
     super(props);
     this.state = {
       questions: [
-        "Example question 1",
-        "Sample question #2"
+        "Example question: What are some activities you enjoy doing?",
+        "Sample question: What is the meaning of life?"
       ]
     };
   }
@@ -23,7 +23,7 @@ class Form extends Component {
       <div id='form-sheet'>
         
         { this.state.questions.map((question, i) => (
-          <Box question={ question } key={ i } />
+          <Box question={ question } key={ i } position={ i } />
         ))}
 
         <button className='btn btn-primary add' onClick={ this.addQuestion.bind(this) } >
