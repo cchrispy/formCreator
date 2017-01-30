@@ -6,11 +6,12 @@ class Box extends Component {
     super(props);
     this.state = {
       input: this.props.question,
+      description: '',
       editor: false
     }
   }
 
-  toggleEdit() {
+  toggleEditor() {
     this.setState({
       editor: true
     })
@@ -28,7 +29,7 @@ class Box extends Component {
         <div className='btn-group' role='group'>
           <button type='button'
                   className='btn btn-xs btn-default edit'
-                  onClick={ this.toggleEdit.bind(this) } >Edit</button>
+                  onClick={ this.toggleEditor.bind(this) } >Edit</button>
 
           <button type='button' className='btn btn-xs btn-danger delete'>
             <span className='glyphicon glyphicon-trash'></span>

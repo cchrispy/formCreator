@@ -21714,14 +21714,15 @@
 
 	    _this.state = {
 	      input: _this.props.question,
+	      description: '',
 	      editor: false
 	    };
 	    return _this;
 	  }
 
 	  _createClass(Box, [{
-	    key: 'toggleEdit',
-	    value: function toggleEdit() {
+	    key: 'toggleEditor',
+	    value: function toggleEditor() {
 	      this.setState({
 	        editor: true
 	      });
@@ -21745,7 +21746,7 @@
 	            'button',
 	            { type: 'button',
 	              className: 'btn btn-xs btn-default edit',
-	              onClick: this.toggleEdit.bind(this) },
+	              onClick: this.toggleEditor.bind(this) },
 	            'Edit'
 	          ),
 	          _react2.default.createElement(
@@ -22156,10 +22157,30 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'editor' },
-	        _react2.default.createElement('textarea', { className: 'form-control',
-	          defaultValue: this.props.placeholder,
-	          rows: '2',
-	          cols: '50' })
+	        _react2.default.createElement(
+	          'form',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'edit-question' },
+	              'Question'
+	            ),
+	            _react2.default.createElement('input', { className: 'form-control',
+	              defaultValue: this.props.placeholder,
+	              id: 'edit-question' }),
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'edit-description' },
+	              'Description'
+	            ),
+	            _react2.default.createElement('input', { className: 'form-control',
+	              defaultValue: 'Description',
+	              id: 'edit-description' })
+	          )
+	        )
 	      );
 	    }
 	  }]);
