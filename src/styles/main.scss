@@ -10,18 +10,27 @@ hr {
 .box {
   padding-left: 24px;
   padding-top: 18px;
+  margin-right: 150px;
 
   hr {
     margin-bottom: 10px;
+  }
+  .question {
+    font-size: 1.3em;
+    padding-left: 8px;
   }
   .description {
     margin-bottom: 5px;
     margin-left: 15px;
     font-size: 1em;
     color: gray;
+    padding-left: 8px;
   }
-  .question {
-    font-size: 1.3em;
+  .hover:hover {
+    cursor: pointer;
+    color: #003B74;
+    background-color: #EBEBEB;
+    border-radius: 5px;
   }
   .edit {
     padding-left: 15px;

@@ -21594,7 +21594,7 @@
 
 
 	// module
-	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .description {\n    margin-bottom: 5px;\n    margin-left: 15px;\n    font-size: 1em;\n    color: gray; }\n  .box .question {\n    font-size: 1.3em; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n\n.editor {\n  width: 700px;\n  margin: 5px 100px 10px 25px; }\n  .editor form > label {\n    margin-bottom: 0px; }\n  .editor .form-group {\n    margin-bottom: 8px; }\n  .editor .input-group:nth-child(n+1) {\n    margin-top: 4px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n", ""]);
+	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px;\n  margin-right: 150px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .question {\n    font-size: 1.3em;\n    padding-left: 8px; }\n  .box .description {\n    margin-bottom: 5px;\n    margin-left: 15px;\n    font-size: 1em;\n    color: gray;\n    padding-left: 8px; }\n  .box .hover:hover {\n    cursor: pointer;\n    color: #003B74;\n    background-color: #EBEBEB;\n    border-radius: 5px; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n\n.editor {\n  width: 700px;\n  margin: 5px 100px 10px 25px; }\n  .editor form > label {\n    margin-bottom: 0px; }\n  .editor .form-group {\n    margin-bottom: 8px; }\n  .editor .input-group:nth-child(n+1) {\n    margin-top: 4px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n", ""]);
 
 	// exports
 
@@ -22119,8 +22119,8 @@
 	  }
 
 	  _createClass(Box, [{
-	    key: 'showEditor',
-	    value: function showEditor() {
+	    key: 'toggleEditor',
+	    value: function toggleEditor() {
 	      this.setState({
 	        editor: !this.state.editor
 	      });
@@ -22128,9 +22128,7 @@
 	  }, {
 	    key: 'hideEditor',
 	    value: function hideEditor() {
-	      this.setState({
-	        editor: false
-	      });
+	      this.setState({ editor: false });
 	    }
 	  }, {
 	    key: 'render',
@@ -22142,15 +22140,15 @@
 	        { className: 'box' },
 	        _react2.default.createElement(
 	          'div',
-	          null,
+	          { onClick: this.toggleEditor.bind(this) },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'question' },
+	            { className: 'question hover' },
 	            this.props.question
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'small description' },
+	            { className: 'small description hover' },
 	            this.props.description || ''
 	          )
 	        ),
@@ -22166,7 +22164,7 @@
 	            'button',
 	            { type: 'button',
 	              className: 'btn btn-xs btn-default edit',
-	              onClick: this.showEditor.bind(this) },
+	              onClick: this.toggleEditor.bind(this) },
 	            'Edit'
 	          ),
 	          _react2.default.createElement(
