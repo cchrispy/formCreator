@@ -21594,7 +21594,7 @@
 
 
 	// module
-	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px;\n  margin-right: 100px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .question {\n    font-size: 1.3em;\n    padding-left: 8px; }\n  .box .description {\n    margin-bottom: 5px;\n    margin-left: 15px;\n    font-size: 1em;\n    color: gray;\n    padding-left: 8px; }\n  .box .hover:hover {\n    cursor: pointer;\n    color: #002FC2;\n    background: linear-gradient(to right, #D8E2FF, white);\n    border-radius: 5px;\n    font-weight: bold; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n  .box .re-order {\n    float: right; }\n\n.editor {\n  width: 700px;\n  margin: 5px 100px 10px 25px; }\n  .editor form > label {\n    margin-bottom: 0px; }\n  .editor .form-group {\n    margin-bottom: 8px; }\n  .editor .input-group:nth-child(n+1) {\n    margin-top: 4px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n", ""]);
+	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px;\n  margin-right: 150px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .question {\n    font-size: 1.3em;\n    padding-left: 8px; }\n  .box .description {\n    margin-bottom: 5px;\n    margin-left: 15px;\n    font-size: 1em;\n    color: gray;\n    padding-left: 8px; }\n  .box .hover:hover {\n    cursor: pointer;\n    color: #002FC2;\n    background: linear-gradient(to right, #D8E2FF, white);\n    border-radius: 5px;\n    font-weight: bold; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n  .box .re-order {\n    float: right; }\n\n.editor {\n  width: 700px;\n  margin: 5px 100px 10px 25px; }\n  .editor form > label {\n    margin-bottom: 0px; }\n  .editor .form-group {\n    margin-bottom: 8px; }\n  .editor .input-group:nth-child(n+1) {\n    margin-top: 4px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n", ""]);
 
 	// exports
 
@@ -21997,12 +21997,12 @@
 	    _this.state = {
 	      dialog: {
 	        0: {
-	          question: 'Example question: What are some activities you enjoy doing?',
+	          question: 'Yo',
 	          description: 'Sample description!!!!'
 	        },
 	        1: {
-	          question: 'Sample question: What is the meaning of life?',
-	          description: ''
+	          question: 'The 12 Ball Problem',
+	          description: 'There are 12 balls. All the balls appear identical to each other, but one of them has a different weight. How many weighings with a balance scale is needed to figure out which ball is the counterfeit AND determine if it\'s heavier or lighter than the other 11 balls?'
 	        },
 	        2: {
 	          question: 'Hello everybody what would you like to do today?',
@@ -22060,7 +22060,7 @@
 	        'div',
 	        { id: 'form-sheet' },
 	        this.state.count.map(function (i) {
-	          return _react2.default.createElement(_Box2.default, { question: _this2.state.dialog[i].question,
+	          return _react2.default.createElement(_Box2.default, { question: _this2.state.dialog[i].question.trim() || 'Edit me!',
 	            description: _this2.state.dialog[i].description,
 	            key: i, position: i,
 	            edit: _this2.edit.bind(_this2),
@@ -22307,6 +22307,7 @@
 	              ),
 	              _react2.default.createElement('input', { className: 'form-control',
 	                defaultValue: this.props.defaultQ,
+	                placeholder: 'Edit me!',
 	                id: 'edit-question',
 	                onChange: this.editQuestion.bind(this) })
 	            ),

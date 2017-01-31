@@ -40,6 +40,7 @@ class Editor extends Component { // Allows a question to be editted
               <div className='input-group-addon'>Question</div>
               <input className='form-control'
                      defaultValue={ this.props.defaultQ }
+                     placeholder='Edit me!'
                      id='edit-question'
                      onChange={ this.editQuestion.bind(this) } >
               </input>

@@ -10,12 +10,12 @@ class Form extends Component {
     this.state = {
       dialog: {
         0: {
-          question: 'Example question: What are some activities you enjoy doing?',
+          question: 'Yo',
           description: 'Sample description!!!!'
         },
         1: {
-          question: 'Sample question: What is the meaning of life?',
-          description: ''
+          question: 'The 12 Ball Problem',
+          description: 'There are 12 balls. All the balls appear identical to each other, but one of them has a different weight. How many weighings with a balance scale is needed to figure out which ball is the counterfeit AND determine if it\'s heavier or lighter than the other 11 balls?'
         },
         2: {
           question: 'Hello everybody what would you like to do today?',
@@ -66,7 +66,7 @@ class Form extends Component {
       <div id='form-sheet'>
         
         { this.state.count.map(i => (
-          <Box question={ this.state.dialog[i].question }
+          <Box question={ this.state.dialog[i].question.trim() || 'Edit me!' }
                description={ this.state.dialog[i].description }
                key={ i } position={ i } 
                edit={ this.edit.bind(this) } 
