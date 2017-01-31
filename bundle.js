@@ -21972,6 +21972,10 @@
 
 	var _Box2 = _interopRequireDefault(_Box);
 
+	var _order = __webpack_require__(187);
+
+	var _order2 = _interopRequireDefault(_order);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -22335,6 +22339,23 @@
 	}(_react.Component);
 
 	exports.default = Editor;
+
+/***/ },
+/* 187 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/*
+	** A helper function to correct the order of questions
+	** form a delete or re-order action
+	*/
+	var order = function order(obj, i) {};
+
+	exports.default = order;
 
 /***/ }
 /******/ ]);

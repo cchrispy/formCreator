@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Box from './Box.jsx';
 
+import order from '../helpers/order';
+
 class Form extends Component { // Maintains all the questions and their order
   constructor(props) {
     super(props);
@@ -25,7 +27,6 @@ class Form extends Component { // Maintains all the questions and their order
     //   count: this.state.count.concat(this.state.count.length);
     // })
   }
-
 
   edit(question, description, i) {
     var newDialog = Object.assign({}, this.state.dialog, { [i]: { question, description } })
