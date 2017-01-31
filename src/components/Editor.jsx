@@ -17,28 +17,17 @@ class Editor extends Component { // Allows a question to be editted
   }
 
   confirm(e) {
-    console.log('confirmed');
     e.preventDefault();
     this.props.edit(this.state.question, this.state.description, this.props.position);
     this.props.hide();
   }
 
-  discard(e) {
-    console.log('discarded');
-    e.preventDefault();
-    this.props.hide();
-  }
-
   editQuestion(e) {
-    this.setState({
-      question: e.target.value
-    })
+    this.setState({ question: e.target.value });
   }
 
   editDescription(e) {
-    this.setState({
-      description: e.target.value
-    })
+    this.setState({ description: e.target.value });
   }
 
   render() {
@@ -71,7 +60,7 @@ class Editor extends Component { // Allows a question to be editted
                     className='btn btn-success btn-xs'>Confirm</button>
             <button type='button' 
                     className='btn btn-warning btn-xs'
-                    onClick={ this.discard.bind(this) } >Discard</button>
+                    onClick={ this.props.hide } >Discard</button>
           </div>
         </form>
       </div>

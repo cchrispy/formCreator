@@ -22019,7 +22019,6 @@
 	  _createClass(Form, [{
 	    key: 'addQuestion',
 	    value: function addQuestion() {
-	      console.log('Add question is not implemented');
 	      var len = this.state.count.length;
 	      var newDialog = Object.assign({}, this.state.dialog, _defineProperty({}, len, {
 	        question: 'Edit me!',
@@ -22238,31 +22237,19 @@
 	  }, {
 	    key: 'confirm',
 	    value: function confirm(e) {
-	      console.log('confirmed');
 	      e.preventDefault();
 	      this.props.edit(this.state.question, this.state.description, this.props.position);
 	      this.props.hide();
 	    }
 	  }, {
-	    key: 'discard',
-	    value: function discard(e) {
-	      console.log('discarded');
-	      e.preventDefault();
-	      this.props.hide();
-	    }
-	  }, {
 	    key: 'editQuestion',
 	    value: function editQuestion(e) {
-	      this.setState({
-	        question: e.target.value
-	      });
+	      this.setState({ question: e.target.value });
 	    }
 	  }, {
 	    key: 'editDescription',
 	    value: function editDescription(e) {
-	      this.setState({
-	        description: e.target.value
-	      });
+	      this.setState({ description: e.target.value });
 	    }
 	  }, {
 	    key: 'render',
@@ -22323,7 +22310,7 @@
 	              'button',
 	              { type: 'button',
 	                className: 'btn btn-warning btn-xs',
-	                onClick: this.discard.bind(this) },
+	                onClick: this.props.hide },
 	              'Discard'
 	            )
 	          )

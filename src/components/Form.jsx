@@ -27,7 +27,6 @@ class Form extends Component {
   }
 
   addQuestion() {
-    console.log('Add question is not implemented');
     var len = this.state.count.length;
     var newDialog = Object.assign({}, this.state.dialog, {
       [len]: {
