@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Box from './Box.jsx';
-
 import order from '../helpers/order';
 
-class Form extends Component { // Maintains all the questions and their order
+/* Maintains all the questions and their order */
+class Form extends Component {
   constructor(props) {
     super(props);
+    /* Track the dialogs in the state, as well as their orders */
     this.state = {
       dialog: {
         0: {
@@ -27,14 +28,27 @@ class Form extends Component { // Maintains all the questions and their order
 
   addQuestion() {
     console.log('Add question is not implemented');
+    var len = this.state.count.length;
+    var newDialog = Object.assign({}, this.state.dialog, {
+      [len]: {
+        question: 'Edit me!',
+        description: ''
+      }
+    })
+    this.setState({
+      dialog: newDialog,
+      count: this.state.count.concat(len)
+    })
   }
 
   edit(question, description, i) {
+    /* Updates the dialog according to the user's edit */
     var newDialog = Object.assign({}, this.state.dialog, { [i]: { question, description } })
     this.setState({ dialog: newDialog })
   }
 
   delete(i) {
+    /* Delete the dialog and adjust/shift the other dialogs appropriately */
     this.setState({
       dialog: order(this.state.dialog, i, this.state.count.length),
       count: this.state.count.slice(0, this.state.count.length - 1)

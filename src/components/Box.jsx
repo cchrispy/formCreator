@@ -5,8 +5,6 @@ class Box extends Component { // Handles editting of a particular question
   constructor(props) {
     super(props);
     this.state = {
-      input: '',
-      description: '',
       editor: false
     }
   }

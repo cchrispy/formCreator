@@ -21594,7 +21594,7 @@
 
 
 	// module
-	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .description {\n    margin-bottom: 5px;\n    margin-left: 15px;\n    color: gray; }\n  .box .question {\n    font-size: 1.3em; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n\n.editor {\n  width: 700px;\n  margin: 5px 100px 10px 25px; }\n  .editor form > label {\n    margin-bottom: 0px; }\n  .editor .form-group {\n    margin-bottom: 8px; }\n  .editor .input-group:nth-child(n+1) {\n    margin-top: 4px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n", ""]);
+	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .description {\n    margin-bottom: 5px;\n    margin-left: 15px;\n    font-size: 1em;\n    color: gray; }\n  .box .question {\n    font-size: 1.3em; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n\n.editor {\n  width: 700px;\n  margin: 5px 100px 10px 25px; }\n  .editor form > label {\n    margin-bottom: 0px; }\n  .editor .form-group {\n    margin-bottom: 8px; }\n  .editor .input-group:nth-child(n+1) {\n    margin-top: 4px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n", ""]);
 
 	// exports
 
@@ -21986,13 +21986,14 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/* Maintains all the questions and their order */
 	var Form = function (_Component) {
 	  _inherits(Form, _Component);
 
-	  // Maintains all the questions and their order
 	  function Form(props) {
 	    _classCallCheck(this, Form);
 
+	    /* Track the dialogs in the state, as well as their orders */
 	    var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
 
 	    _this.state = {
@@ -22019,16 +22020,27 @@
 	    key: 'addQuestion',
 	    value: function addQuestion() {
 	      console.log('Add question is not implemented');
+	      var len = this.state.count.length;
+	      var newDialog = Object.assign({}, this.state.dialog, _defineProperty({}, len, {
+	        question: 'Edit me!',
+	        description: ''
+	      }));
+	      this.setState({
+	        dialog: newDialog,
+	        count: this.state.count.concat(len)
+	      });
 	    }
 	  }, {
 	    key: 'edit',
 	    value: function edit(question, description, i) {
+	      /* Updates the dialog according to the user's edit */
 	      var newDialog = Object.assign({}, this.state.dialog, _defineProperty({}, i, { question: question, description: description }));
 	      this.setState({ dialog: newDialog });
 	    }
 	  }, {
 	    key: 'delete',
 	    value: function _delete(i) {
+	      /* Delete the dialog and adjust/shift the other dialogs appropriately */
 	      this.setState({
 	        dialog: (0, _order2.default)(this.state.dialog, i, this.state.count.length),
 	        count: this.state.count.slice(0, this.state.count.length - 1)
@@ -22101,8 +22113,6 @@
 	    var _this = _possibleConstructorReturn(this, (Box.__proto__ || Object.getPrototypeOf(Box)).call(this, props));
 
 	    _this.state = {
-	      input: '',
-	      description: '',
 	      editor: false
 	    };
 	    return _this;
