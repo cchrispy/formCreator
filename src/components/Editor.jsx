@@ -34,7 +34,7 @@ class Editor extends Component { // Allows a question to be editted
     return (
       <div className='editor'>
         <form onSubmit={ this.confirm.bind(this) } >
-          <label>Edit question</label>
+          <label>Edit dialog</label>
           <div className='form-group'>
             <div className='input-group'>
               <div className='input-group-addon'>Question</div>

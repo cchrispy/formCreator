@@ -21997,16 +21997,16 @@
 	    _this.state = {
 	      dialog: {
 	        0: {
-	          question: 'Yo',
-	          description: 'Sample description!!!!'
+	          question: 'This is a quick and easy form builder! You can add, remove, and edit dialog.',
+	          description: ''
 	        },
 	        1: {
 	          question: 'The 12 Ball Problem',
 	          description: 'There are 12 balls. All the balls appear identical to each other, but one of them has a different weight. How many weighings with a balance scale is needed to figure out which ball is the counterfeit AND determine if it\'s heavier or lighter than the other 11 balls?'
 	        },
 	        2: {
-	          question: 'Hello everybody what would you like to do today?',
-	          description: 'I don\'t really know what you are talking about so yup'
+	          question: 'What is your favorite joke of all times?',
+	          description: 'Example: There\'s a band called 1023MB. They haven\'t had any gigs yet.'
 	        }
 	      },
 	      count: [0, 1, 2]
@@ -22292,7 +22292,7 @@
 	          _react2.default.createElement(
 	            'label',
 	            null,
-	            'Edit question'
+	            'Edit dialog'
 	          ),
 	          _react2.default.createElement(
 	            'div',
