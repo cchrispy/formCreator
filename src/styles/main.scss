@@ -11,15 +11,17 @@ hr {
   padding-left: 24px;
   padding-top: 18px;
 
-  .question {
-    font-size: 1.3em;
-    margin-bottom: 5px;
-  }
-
   hr {
     margin-bottom: 10px;
   }
-
+  .description {
+    margin-bottom: 5px;
+    margin-left: 15px;
+    color: gray;
+  }
+  .question {
+    font-size: 1.3em;
+  }
   .edit {
     padding-left: 15px;
     padding-right: 15px;
@@ -27,7 +29,18 @@ hr {
 }
 
 .editor {
+  width: 700px;
   margin: 5px 100px 10px 25px;
+
+  form > label {
+    margin-bottom: 0px;
+  }
+  .form-group {
+    margin-bottom: 8px;
+  }
+  .input-group:nth-child(n+1) {
+    margin-top: 4px;
+  }
 }
 
 #form-sheet {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Editor extends Component {
+class Editor extends Component { // Allows a question to be editted
   constructor(props) {
     super(props);
     this.state = {
@@ -9,31 +9,62 @@ class Editor extends Component {
     };
   }
 
+  componentWillMount() {
+    this.setState({
+      question: this.props.defaultQ,
+      description: this.props.defaultD
+    })
+  }
+
   confirm(e) {
-    e.preventDefault();
     console.log('confirmed');
+    e.preventDefault();
+    this.props.edit(this.state.question, this.state.description, this.props.position);
+    this.props.hide();
   }
 
   discard(e) {
-    e.preventDefault();
     console.log('discarded');
+    e.preventDefault();
+    this.props.hide();
+  }
+
+  editQuestion(e) {
+    this.setState({
+      question: e.target.value
+    })
+  }
+
+  editDescription(e) {
+    this.setState({
+      description: e.target.value
+    })
   }
 
   render() {
     return (
       <div className='editor'>
         <form onSubmit={ this.confirm.bind(this) } >
+          <label>Edit question</label>
           <div className='form-group'>
-            <label htmlFor='edit-question'>Question</label>
-            <input className='form-control'
-                   defaultValue={ this.props.placeholder }
-                   id='edit-question' >
-            </input>
-            <label htmlFor='edit-description' >Description</label>
-            <input className='form-control'
-                   defaultValue={ this.state.description || 'Description' }
-                   id='edit-description' >
-            </input>
+            <div className='input-group'>
+              <div className='input-group-addon'>Question</div>
+              <input className='form-control'
+                     defaultValue={ this.props.defaultQ }
+                     id='edit-question'
+                     onChange={ this.editQuestion.bind(this) } >
+              </input>
+            </div>
+            <div className='input-group'>
+              <div className='input-group-addon'>Description</div>
+              <textarea className='form-control'
+                     defaultValue={ this.props.defaultD }
+                     placeholder='Enter a description'
+                     id='edit-description'
+                     onChange={ this.editDescription.bind(this) }
+                     rows='2' >
+              </textarea>
+            </div>
           </div>
           <div className='btn-group'>
             <button type='submit' 
