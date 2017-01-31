@@ -21976,8 +21976,6 @@
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -22012,10 +22010,10 @@
 	  _createClass(Form, [{
 	    key: 'addQuestion',
 	    value: function addQuestion() {
-	      this.setState({
-	        questions: this.state.questions.concat('New question'),
-	        count: [].concat(_toConsumableArray(this.state.count), [this.state.count.length])
-	      });
+	      console.log('Add question is not implemented');
+	      // this.setState({
+	      //   count: this.state.count.concat(this.state.count.length);
+	      // })
 	    }
 	  }, {
 	    key: 'edit',
@@ -22025,7 +22023,15 @@
 	    }
 	  }, {
 	    key: 'delete',
-	    value: function _delete(i) {}
+	    value: function _delete(i) {
+	      console.log('deleted: ', i);
+	      var newDialog = Object.assign({}, this.state.dialog);
+	      delete newDialog[i];
+	      this.setState({
+	        dialog: newDialog,
+	        count: this.state.count.slice(0, this.state.count.length - 1)
+	      });
+	    }
 
 	    // editQuestion(str, i) {
 	    //   var questions = [...this.state.questions];
@@ -22113,7 +22119,7 @@
 	    key: 'showEditor',
 	    value: function showEditor() {
 	      this.setState({
-	        editor: true
+	        editor: !this.state.editor
 	      });
 	    }
 	  }, {
@@ -22124,11 +22130,10 @@
 	      });
 	    }
 	  }, {
-	    key: 'delete',
-	    value: function _delete() {}
-	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'box' },
@@ -22165,7 +22170,9 @@
 	            'button',
 	            { type: 'button',
 	              className: 'btn btn-xs btn-danger delete',
-	              onClick: this.delete.bind(this) },
+	              onClick: function onClick() {
+	                return _this2.props.delete(_this2.props.position);
+	              } },
 	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-trash' })
 	          )
 	        ),

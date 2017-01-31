@@ -20,10 +20,10 @@ class Form extends Component { // Maintains all the questions and their order
   }
 
   addQuestion() {
-    this.setState({
-      questions: this.state.questions.concat('New question'),
-      count: [...this.state.count, this.state.count.length]
-    });
+    console.log('Add question is not implemented');
+    // this.setState({
+    //   count: this.state.count.concat(this.state.count.length);
+    // })
   }
 
 
@@ -33,7 +33,13 @@ class Form extends Component { // Maintains all the questions and their order
   }
 
   delete(i) {
-
+    console.log('deleted: ', i);
+    var newDialog = Object.assign({}, this.state.dialog);
+    delete newDialog[i];
+    this.setState({
+      dialog: newDialog,
+      count: this.state.count.slice(0, this.state.count.length - 1)
+    })
   }
 
   // editQuestion(str, i) {

@@ -13,7 +13,7 @@ class Box extends Component { // Handles editting of a particular question
 
   showEditor() {
     this.setState({
-      editor: true
+      editor: !this.state.editor
     })
   }
 
@@ -21,10 +21,6 @@ class Box extends Component { // Handles editting of a particular question
     this.setState({
       editor: false
     })
-  }
-
-  delete() {
-    
   }
 
   render() {
@@ -51,7 +47,7 @@ class Box extends Component { // Handles editting of a particular question
 
           <button type='button' 
                   className='btn btn-xs btn-danger delete'
-                  onClick={ this.delete.bind(this) } >
+                  onClick={ () => this.props.delete(this.props.position) } >
             <span className='glyphicon glyphicon-trash'></span>
           </button>
         </div>
