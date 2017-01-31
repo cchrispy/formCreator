@@ -10,7 +10,7 @@ hr {
 .box {
   padding-left: 24px;
   padding-top: 18px;
-  margin-right: 150px;
+  margin-right: 100px;
 
   hr {
     margin-bottom: 10px;
@@ -35,6 +35,9 @@ hr {
   .edit {
     padding-left: 15px;
     padding-right: 15px;
+  }
+  .re-order {
+    float: right;
   }
 }
 

@@ -21594,7 +21594,7 @@
 
 
 	// module
-	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px;\n  margin-right: 150px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .question {\n    font-size: 1.3em;\n    padding-left: 8px; }\n  .box .description {\n    margin-bottom: 5px;\n    margin-left: 15px;\n    font-size: 1em;\n    color: gray;\n    padding-left: 8px; }\n  .box .hover:hover {\n    cursor: pointer;\n    color: #003B74;\n    background-color: #EBEBEB;\n    border-radius: 5px; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n\n.editor {\n  width: 700px;\n  margin: 5px 100px 10px 25px; }\n  .editor form > label {\n    margin-bottom: 0px; }\n  .editor .form-group {\n    margin-bottom: 8px; }\n  .editor .input-group:nth-child(n+1) {\n    margin-top: 4px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n", ""]);
+	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px;\n  margin-right: 100px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .question {\n    font-size: 1.3em;\n    padding-left: 8px; }\n  .box .description {\n    margin-bottom: 5px;\n    margin-left: 15px;\n    font-size: 1em;\n    color: gray;\n    padding-left: 8px; }\n  .box .hover:hover {\n    cursor: pointer;\n    color: #003B74;\n    background-color: #EBEBEB;\n    border-radius: 5px; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n  .box .re-order {\n    float: right; }\n\n.editor {\n  width: 700px;\n  margin: 5px 100px 10px 25px; }\n  .editor form > label {\n    margin-bottom: 0px; }\n  .editor .form-group {\n    margin-bottom: 8px; }\n  .editor .input-group:nth-child(n+1) {\n    margin-top: 4px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n", ""]);
 
 	// exports
 
@@ -22046,6 +22046,11 @@
 	      });
 	    }
 	  }, {
+	    key: 'reorder',
+	    value: function reorder(i, up) {
+	      if (up) {} else {}
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -22174,6 +22179,22 @@
 	                return _this2.props.delete(_this2.props.position);
 	              } },
 	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-trash' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'btn-group re-order', role: 'group' },
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'button',
+	              className: 'btn btn-xs btn-default up' },
+	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-up' })
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'button',
+	              className: 'btn btn-xs btn-default down' },
+	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-down' })
 	          )
 	        ),
 	        _react2.default.createElement('hr', null)

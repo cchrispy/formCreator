@@ -54,6 +54,14 @@ class Form extends Component {
     })
   }
 
+  reorder(i, up) {
+    if (up) {
+
+    } else {
+      
+    }
+  }
+
   render() {
     return (
       <div id='form-sheet'>
