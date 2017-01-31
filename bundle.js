@@ -22046,6 +22046,7 @@
 	  }, {
 	    key: 'reorder',
 	    value: function reorder(i, up) {
+	      /* Re-order the dialog with respect to the other dialogs */
 	      var newDialog = (0, _order.reorder)(this.state.dialog, i, up);
 	      if (newDialog) {
 	        this.setState({ dialog: newDialog });
@@ -22191,7 +22192,8 @@
 	            { type: 'button',
 	              className: 'btn btn-xs btn-default up',
 	              onClick: function onClick() {
-	                return _this2.props.reorder(_this2.props.position, true);
+	                _this2.hideEditor();
+	                _this2.props.reorder(_this2.props.position, true);
 	              } },
 	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-up' })
 	          ),
@@ -22200,7 +22202,8 @@
 	            { type: 'button',
 	              className: 'btn btn-xs btn-default down',
 	              onClick: function onClick() {
-	                return _this2.props.reorder(_this2.props.position, false);
+	                _this2.hideEditor();
+	                _this2.props.reorder(_this2.props.position, false);
 	              } },
 	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-down' })
 	          )

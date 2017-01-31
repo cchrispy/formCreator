@@ -55,6 +55,7 @@ class Form extends Component {
   }
 
   reorder(i, up) {
+    /* Re-order the dialog with respect to the other dialogs */
     var newDialog = reorder(this.state.dialog, i, up);
     if (newDialog) {
       this.setState({ dialog: newDialog })

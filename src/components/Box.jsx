@@ -53,13 +53,19 @@ class Box extends Component {
         <div className='btn-group re-order' role='group'>
           <button type='button'
                   className='btn btn-xs btn-default up'
-                  onClick={ () => this.props.reorder(this.props.position, true) } >
+                  onClick={ () => {
+                    this.hideEditor();
+                    this.props.reorder(this.props.position, true);
+                  } } >
             <span className='glyphicon glyphicon-arrow-up'></span>
           </button>
 
           <button type='button' 
                   className='btn btn-xs btn-default down'
-                  onClick={ () => this.props.reorder(this.props.position, false) } >
+                  onClick={ () => {
+                    this.hideEditor();
+                    this.props.reorder(this.props.position, false);
+                  } } >
             <span className='glyphicon glyphicon-arrow-down'></span>
           </button>
         </div>
