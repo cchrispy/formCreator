@@ -22004,9 +22004,13 @@
 	        1: {
 	          question: 'Sample question: What is the meaning of life?',
 	          description: ''
+	        },
+	        2: {
+	          question: 'Hello everybody what would you like to do today?',
+	          description: 'I don\'t really know what you are talking about so yup'
 	        }
 	      },
-	      count: [0, 1]
+	      count: [0, 1, 2]
 	    };
 	    return _this;
 	  }
@@ -22015,9 +22019,6 @@
 	    key: 'addQuestion',
 	    value: function addQuestion() {
 	      console.log('Add question is not implemented');
-	      // this.setState({
-	      //   count: this.state.count.concat(this.state.count.length);
-	      // })
 	    }
 	  }, {
 	    key: 'edit',
@@ -22028,23 +22029,11 @@
 	  }, {
 	    key: 'delete',
 	    value: function _delete(i) {
-	      console.log('deleted: ', i);
-	      var newDialog = Object.assign({}, this.state.dialog);
-	      delete newDialog[i];
 	      this.setState({
-	        dialog: newDialog,
+	        dialog: (0, _order2.default)(this.state.dialog, i, this.state.count.length),
 	        count: this.state.count.slice(0, this.state.count.length - 1)
 	      });
 	    }
-
-	    // editQuestion(str, i) {
-	    //   var questions = [...this.state.questions];
-	    //   questions[i] = str;
-	    //   this.setState({
-	    //     questions
-	    //   });
-	    // }
-
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -22351,9 +22340,21 @@
 	});
 	/*
 	** A helper function to correct the order of questions
-	** form a delete or re-order action
+	** from a delete or re-order action
 	*/
-	var order = function order(obj, i) {};
+	var order = function order(obj, i, len) {
+
+	  var copy = Object.assign({}, obj);
+	  delete copy[i];
+
+	  var index = i;
+	  while (index < len - 1) {
+	    copy[index] = copy[++index];
+	  }
+	  delete copy[index];
+
+	  return copy;
+	};
 
 	exports.default = order;
 
