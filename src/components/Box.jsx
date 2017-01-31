@@ -10,30 +10,20 @@ class Box extends Component {
     }
   }
 
-  toggleEditor() {
-    this.setState({
-      editor: !this.state.editor
-    })
-  }
-
-  hideEditor() {
-    this.setState({ editor: false });
-  }
-
   render() {
     return (
       <div className='box'>
 
-        <div onClick={ this.toggleEditor.bind(this) } >
+        <div onClick={ () => this.props.toggleEditor(this.props.position) } >
           <div className='question hover'>{ this.props.question }</div>
           <div className='small description hover'>{ this.props.description || '' }</div>
         </div>
 
         {
-          !this.state.editor ? null : 
+          !this.props.stateEditor ? null : 
             <Editor defaultQ={ this.props.question }
                     defaultD={ this.props.description }
-                    hide={ this.hideEditor.bind(this) }
+                    hide={ this.props.hideEditor }
                     position={ this.props.position }
                     edit={ this.props.edit } />
         }
@@ -41,7 +31,7 @@ class Box extends Component {
         <div className='btn-group' role='group'>
           <button type='button'
                   className='btn btn-xs btn-default edit'
-                  onClick={ this.toggleEditor.bind(this) } >Edit</button>
+                  onClick={ () => this.props.toggleEditor(this.props.position) } >Edit</button>
 
           <button type='button' 
                   className='btn btn-xs btn-danger delete'
@@ -53,19 +43,13 @@ class Box extends Component {
         <div className='btn-group re-order' role='group'>
           <button type='button'
                   className='btn btn-xs btn-default up'
-                  onClick={ () => {
-                    this.hideEditor();
-                    this.props.reorder(this.props.position, true);
-                  } } >
+                  onClick={ () => { this.props.reorder(this.props.position, true) } } >
             <span className='glyphicon glyphicon-arrow-up'></span>
           </button>
 
           <button type='button' 
                   className='btn btn-xs btn-default down'
-                  onClick={ () => {
-                    this.hideEditor();
-                    this.props.reorder(this.props.position, false);
-                  } } >
+                  onClick={ () => { this.props.reorder(this.props.position, false) } } >
             <span className='glyphicon glyphicon-arrow-down'></span>
           </button>
         </div>

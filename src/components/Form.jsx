@@ -11,15 +11,18 @@ class Form extends Component {
       dialog: {
         0: {
           question: 'This is a quick and easy form builder! You can add, remove, and edit dialog.',
-          description: ''
+          description: '',
+          editor: false
         },
         1: {
           question: 'The 12 Ball Problem',
-          description: 'There are 12 balls. All the balls appear identical to each other, but one of them has a different weight. How many weighings with a balance scale is needed to figure out which ball is the counterfeit AND determine if it\'s heavier or lighter than the other 11 balls?'
+          description: 'There are 12 balls. All the balls appear identical to each other, but one of them has a different weight. How many weighings with a balance scale is needed to figure out which ball is the counterfeit AND determine if it\'s heavier or lighter than the other 11 balls?',
+          editor: false
         },
         2: {
           question: 'What is your favorite joke of all times?',
-          description: 'Example: There\'s a band called 1023MB. They haven\'t had any gigs yet.'
+          description: 'Example: There\'s a band called 1023MB. They haven\'t had any gigs yet.',
+          editor: false
         }
       },
       count: [0, 1, 2]
@@ -42,8 +45,11 @@ class Form extends Component {
 
   edit(question, description, i) {
     /* Updates the dialog according to the user's edit */
-    var newDialog = Object.assign({}, this.state.dialog, { [i]: { question, description } })
-    this.setState({ dialog: newDialog })
+    var newDialog = Object.assign({}, this.state.dialog)
+    newDialog[i].question = question;
+    newDialog[i].description = description;
+    newDialog[i].editor = false;
+    this.setState({ dialog: newDialog })
   }
 
   delete(i) {
@@ -62,6 +68,22 @@ class Form extends Component {
     }
   }
 
+  toggleEditor(i) {
+    var show = !this.state.dialog[i].editor;
+    var newDialog = Object.assign({}, this.state.dialog);
+    for (var prop in newDialog) {
+      newDialog[prop].editor = false;
+    }
+    newDialog[i].editor = show;
+    this.setState({ dialog: newDialog })
+  }
+
+  hideEditor(i) {
+    var newDialog = Object.assign({}, this.state.dialog);
+    newDialog[i].editor = false;
+    this.setState({ dialog: newDialog })
+  }
+
   render() {
     return (
       <div id='form-sheet'>
@@ -72,7 +94,10 @@ class Form extends Component {
                key={ i } position={ i } 
                edit={ this.edit.bind(this) } 
                delete={ this.delete.bind(this) }
-               reorder={ this.reorder.bind(this) } />
+               reorder={ this.reorder.bind(this) }
+               toggleEditor={ this.toggleEditor.bind(this) }
+               hideEditor={ this.hideEditor.bind(this) }
+               stateEditor={ this.state.dialog[i].editor } />
         ))}
 
         <button className='btn btn-primary add' onClick={ this.addQuestion.bind(this) } >

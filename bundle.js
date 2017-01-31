@@ -21998,15 +21998,18 @@
 	      dialog: {
 	        0: {
 	          question: 'This is a quick and easy form builder! You can add, remove, and edit dialog.',
-	          description: ''
+	          description: '',
+	          editor: false
 	        },
 	        1: {
 	          question: 'The 12 Ball Problem',
-	          description: 'There are 12 balls. All the balls appear identical to each other, but one of them has a different weight. How many weighings with a balance scale is needed to figure out which ball is the counterfeit AND determine if it\'s heavier or lighter than the other 11 balls?'
+	          description: 'There are 12 balls. All the balls appear identical to each other, but one of them has a different weight. How many weighings with a balance scale is needed to figure out which ball is the counterfeit AND determine if it\'s heavier or lighter than the other 11 balls?',
+	          editor: false
 	        },
 	        2: {
 	          question: 'What is your favorite joke of all times?',
-	          description: 'Example: There\'s a band called 1023MB. They haven\'t had any gigs yet.'
+	          description: 'Example: There\'s a band called 1023MB. They haven\'t had any gigs yet.',
+	          editor: false
 	        }
 	      },
 	      count: [0, 1, 2]
@@ -22031,7 +22034,10 @@
 	    key: 'edit',
 	    value: function edit(question, description, i) {
 	      /* Updates the dialog according to the user's edit */
-	      var newDialog = Object.assign({}, this.state.dialog, _defineProperty({}, i, { question: question, description: description }));
+	      var newDialog = Object.assign({}, this.state.dialog);
+	      newDialog[i].question = question;
+	      newDialog[i].description = description;
+	      newDialog[i].editor = false;
 	      this.setState({ dialog: newDialog });
 	    }
 	  }, {
@@ -22053,6 +22059,24 @@
 	      }
 	    }
 	  }, {
+	    key: 'toggleEditor',
+	    value: function toggleEditor(i) {
+	      var show = !this.state.dialog[i].editor;
+	      var newDialog = Object.assign({}, this.state.dialog);
+	      for (var prop in newDialog) {
+	        newDialog[prop].editor = false;
+	      }
+	      newDialog[i].editor = show;
+	      this.setState({ dialog: newDialog });
+	    }
+	  }, {
+	    key: 'hideEditor',
+	    value: function hideEditor(i) {
+	      var newDialog = Object.assign({}, this.state.dialog);
+	      newDialog[i].editor = false;
+	      this.setState({ dialog: newDialog });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -22066,7 +22090,10 @@
 	            key: i, position: i,
 	            edit: _this2.edit.bind(_this2),
 	            'delete': _this2.delete.bind(_this2),
-	            reorder: _this2.reorder.bind(_this2) });
+	            reorder: _this2.reorder.bind(_this2),
+	            toggleEditor: _this2.toggleEditor.bind(_this2),
+	            hideEditor: _this2.hideEditor.bind(_this2),
+	            stateEditor: _this2.state.dialog[i].editor });
 	        }),
 	        _react2.default.createElement(
 	          'button',
@@ -22126,18 +22153,6 @@
 	  }
 
 	  _createClass(Box, [{
-	    key: 'toggleEditor',
-	    value: function toggleEditor() {
-	      this.setState({
-	        editor: !this.state.editor
-	      });
-	    }
-	  }, {
-	    key: 'hideEditor',
-	    value: function hideEditor() {
-	      this.setState({ editor: false });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -22147,7 +22162,9 @@
 	        { className: 'box' },
 	        _react2.default.createElement(
 	          'div',
-	          { onClick: this.toggleEditor.bind(this) },
+	          { onClick: function onClick() {
+	              return _this2.props.toggleEditor(_this2.props.position);
+	            } },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'question hover' },
@@ -22159,9 +22176,9 @@
 	            this.props.description || ''
 	          )
 	        ),
-	        !this.state.editor ? null : _react2.default.createElement(_Editor2.default, { defaultQ: this.props.question,
+	        !this.props.stateEditor ? null : _react2.default.createElement(_Editor2.default, { defaultQ: this.props.question,
 	          defaultD: this.props.description,
-	          hide: this.hideEditor.bind(this),
+	          hide: this.props.hideEditor,
 	          position: this.props.position,
 	          edit: this.props.edit }),
 	        _react2.default.createElement(
@@ -22171,7 +22188,9 @@
 	            'button',
 	            { type: 'button',
 	              className: 'btn btn-xs btn-default edit',
-	              onClick: this.toggleEditor.bind(this) },
+	              onClick: function onClick() {
+	                return _this2.props.toggleEditor(_this2.props.position);
+	              } },
 	            'Edit'
 	          ),
 	          _react2.default.createElement(
@@ -22192,7 +22211,6 @@
 	            { type: 'button',
 	              className: 'btn btn-xs btn-default up',
 	              onClick: function onClick() {
-	                _this2.hideEditor();
 	                _this2.props.reorder(_this2.props.position, true);
 	              } },
 	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-up' })
@@ -22202,7 +22220,6 @@
 	            { type: 'button',
 	              className: 'btn btn-xs btn-default down',
 	              onClick: function onClick() {
-	                _this2.hideEditor();
 	                _this2.props.reorder(_this2.props.position, false);
 	              } },
 	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-down' })
@@ -22271,7 +22288,7 @@
 	    value: function confirm(e) {
 	      e.preventDefault();
 	      this.props.edit(this.state.question, this.state.description, this.props.position);
-	      this.props.hide();
+	      this.props.hide(this.props.position);
 	    }
 	  }, {
 	    key: 'editQuestion',
@@ -22286,6 +22303,8 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'editor' },
@@ -22343,7 +22362,9 @@
 	              'button',
 	              { type: 'button',
 	                className: 'btn btn-warning btn-xs',
-	                onClick: this.props.hide },
+	                onClick: function onClick() {
+	                  return _this2.props.hide(_this2.props.position);
+	                } },
 	              'Discard'
 	            )
 	          )

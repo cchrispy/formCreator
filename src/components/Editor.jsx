@@ -19,7 +19,7 @@ class Editor extends Component { // Allows a question to be editted
   confirm(e) {
     e.preventDefault();
     this.props.edit(this.state.question, this.state.description, this.props.position);
-    this.props.hide();
+    this.props.hide(this.props.position);
   }
 
   editQuestion(e) {
@@ -61,7 +61,7 @@ class Editor extends Component { // Allows a question to be editted
                     className='btn btn-success btn-xs'>Confirm</button>
             <button type='button' 
                     className='btn btn-warning btn-xs'
-                    onClick={ this.props.hide } >Discard</button>
+                    onClick={ () => this.props.hide(this.props.position) } >Discard</button>
           </div>
         </form>
       </div>
