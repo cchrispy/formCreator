@@ -28,9 +28,10 @@ hr {
   }
   .hover:hover {
     cursor: pointer;
-    color: #003B74;
-    background-color: #EBEBEB;
+    color: #002FC2;
+    background: linear-gradient(to right, #D8E2FF, white);
     border-radius: 5px;
+    font-weight: bold;
   }
   .edit {
     padding-left: 15px;
