@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Box from './Box.jsx';
-import order from '../helpers/order';
+import { order, reorder } from '../helpers/order';
 
 /* Maintains all the questions and their order */
 class Form extends Component {
@@ -55,10 +55,9 @@ class Form extends Component {
   }
 
   reorder(i, up) {
-    if (up) {
-
-    } else {
-      
+    var newDialog = reorder(this.state.dialog, i, up);
+    if (newDialog) {
+      this.setState({ dialog: newDialog })
     }
   }
 
@@ -71,7 +70,8 @@ class Form extends Component {
                description={ this.state.dialog[i].description }
                key={ i } position={ i } 
                edit={ this.edit.bind(this) } 
-               delete={ this.delete.bind(this) } />
+               delete={ this.delete.bind(this) }
+               reorder={ this.reorder.bind(this) } />
         ))}
 
         <button className='btn btn-primary add' onClick={ this.addQuestion.bind(this) } >

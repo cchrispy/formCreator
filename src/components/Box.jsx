@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Editor from './Editor.jsx';
 
-class Box extends Component { // Handles editting of a particular question
+/* Handles editting of a particular question */
+class Box extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +23,7 @@ class Box extends Component { // Handles editting of a particular question
   render() {
     return (
       <div className='box'>
-      
+
         <div onClick={ this.toggleEditor.bind(this) } >
           <div className='question hover'>{ this.props.question }</div>
           <div className='small description hover'>{ this.props.description || '' }</div>
@@ -51,12 +52,14 @@ class Box extends Component { // Handles editting of a particular question
 
         <div className='btn-group re-order' role='group'>
           <button type='button'
-                  className='btn btn-xs btn-default up' >
+                  className='btn btn-xs btn-default up'
+                  onClick={ () => this.props.reorder(this.props.position, true) } >
             <span className='glyphicon glyphicon-arrow-up'></span>
           </button>
 
           <button type='button' 
-                  className='btn btn-xs btn-default down' >
+                  className='btn btn-xs btn-default down'
+                  onClick={ () => this.props.reorder(this.props.position, false) } >
             <span className='glyphicon glyphicon-arrow-down'></span>
           </button>
         </div>

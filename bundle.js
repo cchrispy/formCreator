@@ -21974,8 +21974,6 @@
 
 	var _order = __webpack_require__(187);
 
-	var _order2 = _interopRequireDefault(_order);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -22041,14 +22039,17 @@
 	    value: function _delete(i) {
 	      /* Delete the dialog and adjust/shift the other dialogs appropriately */
 	      this.setState({
-	        dialog: (0, _order2.default)(this.state.dialog, i, this.state.count.length),
+	        dialog: (0, _order.order)(this.state.dialog, i, this.state.count.length),
 	        count: this.state.count.slice(0, this.state.count.length - 1)
 	      });
 	    }
 	  }, {
 	    key: 'reorder',
 	    value: function reorder(i, up) {
-	      if (up) {} else {}
+	      var newDialog = (0, _order.reorder)(this.state.dialog, i, up);
+	      if (newDialog) {
+	        this.setState({ dialog: newDialog });
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -22063,7 +22064,8 @@
 	            description: _this2.state.dialog[i].description,
 	            key: i, position: i,
 	            edit: _this2.edit.bind(_this2),
-	            'delete': _this2.delete.bind(_this2) });
+	            'delete': _this2.delete.bind(_this2),
+	            reorder: _this2.reorder.bind(_this2) });
 	        }),
 	        _react2.default.createElement(
 	          'button',
@@ -22107,10 +22109,10 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/* Handles editting of a particular question */
 	var Box = function (_Component) {
 	  _inherits(Box, _Component);
 
-	  // Handles editting of a particular question
 	  function Box(props) {
 	    _classCallCheck(this, Box);
 
@@ -22187,13 +22189,19 @@
 	          _react2.default.createElement(
 	            'button',
 	            { type: 'button',
-	              className: 'btn btn-xs btn-default up' },
+	              className: 'btn btn-xs btn-default up',
+	              onClick: function onClick() {
+	                return _this2.props.reorder(_this2.props.position, true);
+	              } },
 	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-up' })
 	          ),
 	          _react2.default.createElement(
 	            'button',
 	            { type: 'button',
-	              className: 'btn btn-xs btn-default down' },
+	              className: 'btn btn-xs btn-default down',
+	              onClick: function onClick() {
+	                return _this2.props.reorder(_this2.props.position, false);
+	              } },
 	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-arrow-down' })
 	          )
 	        ),
@@ -22372,7 +22380,27 @@
 	  return copy;
 	};
 
-	exports.default = order;
+	var reorder = function reorder(obj, i, up) {
+
+	  var copy = Object.assign({}, obj);
+	  var max = Object.keys(obj).length - 1;
+	  var temp = copy[i];
+
+	  if (up && i) {
+	    copy[i] = copy[i - 1];
+	    copy[i - 1] = temp;
+	  } else if (!up && i < max) {
+	    copy[i] = copy[i + 1];
+	    copy[i + 1] = temp;
+	  } else {
+	    return false;
+	  }
+
+	  return copy;
+	};
+
+	exports.order = order;
+	exports.reorder = reorder;
 
 /***/ }
 /******/ ]);

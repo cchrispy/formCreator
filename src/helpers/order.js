@@ -16,4 +16,23 @@ const order = (obj, i, len) => {
   return copy;
 }
 
-export default order;
+const reorder = (obj, i, up) => {
+
+  var copy = Object.assign({}, obj);
+  var max = Object.keys(obj).length - 1;
+  var temp = copy[i];
+
+  if (up && i) {
+    copy[i] = copy[i - 1];
+    copy[i - 1] = temp;
+  } else if (!up && i < max) {
+    copy[i] = copy[i + 1];
+    copy[i + 1] = temp;
+  } else {
+    return false;
+  }
+
+  return copy;
+}
+
+export { order, reorder };
