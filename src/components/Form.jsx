@@ -12,17 +12,23 @@ class Form extends Component {
         0: {
           question: 'This is a quick and easy form builder! You can add, remove, and edit dialog.',
           description: '',
-          editor: false
+          editor: false,
+          options: '',
+          extra: ''
         },
         1: {
           question: 'The 12 Ball Problem',
           description: 'There are 12 balls. All the balls appear identical to each other, but one of them has a different weight. How many weighings with a balance scale is needed to figure out which ball is the counterfeit AND determine if it\'s heavier or lighter than the other 11 balls?',
-          editor: false
+          editor: false,
+          options: '',
+          extra: ''
         },
         2: {
           question: 'What is your favorite joke of all times?',
           description: 'Example: There\'s a band called 1023MB. They haven\'t had any gigs yet.',
-          editor: false
+          editor: false,
+          options: '',
+          extra: ''
         }
       },
       count: [0, 1, 2]
@@ -43,12 +49,14 @@ class Form extends Component {
     })
   }
 
-  edit(question, description, i) {
+  edit(question, description, i, options, extra) {
     /* Updates the dialog according to the user's edit */
     var newDialog = Object.assign({}, this.state.dialog)
     newDialog[i].question = question;
     newDialog[i].description = description;
     newDialog[i].editor = false;
+    newDialog[i].options = options;
+    newDialog[i].extra = extra;
     this.setState({ dialog: newDialog })
   }
 
@@ -91,6 +99,7 @@ class Form extends Component {
         { this.state.count.map(i => (
           <Box question={ this.state.dialog[i].question.trim() || 'Edit me!' }
                description={ this.state.dialog[i].description }
+               dialog={ this.state.dialog[i] }
                key={ i } position={ i } 
                edit={ this.edit.bind(this) } 
                delete={ this.delete.bind(this) }

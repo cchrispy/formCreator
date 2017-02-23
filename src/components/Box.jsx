@@ -17,6 +17,9 @@ class Box extends Component {
         <div onClick={ () => this.props.toggleEditor(this.props.position) } >
           <div className='question hover'>{ this.props.question }</div>
           <div className='small description hover'>{ this.props.description || '' }</div>
+          <div className='small'>{ this.props.dialog.options === 'Options' ? 'No option selected' : this.props.dialog.options }</div>
+          <div className='small'>{ this.props.dialog.extra }</div>
+          <div></div>
         </div>
 
         {

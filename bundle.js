@@ -21594,7 +21594,7 @@
 
 
 	// module
-	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px;\n  margin-right: 150px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .question {\n    font-size: 1.3em;\n    padding-left: 8px; }\n  .box .description {\n    margin-bottom: 5px;\n    margin-left: 15px;\n    font-size: 1em;\n    color: gray;\n    padding-left: 8px; }\n  .box .hover:hover {\n    cursor: pointer;\n    color: #002FC2;\n    background: linear-gradient(to right, #D8E2FF, white);\n    border-radius: 5px;\n    font-weight: bold; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n  .box .re-order {\n    float: right; }\n\n.editor {\n  width: 700px;\n  margin: 5px 100px 10px 25px; }\n  .editor form > label {\n    margin-bottom: 0px; }\n  .editor .form-group {\n    margin-bottom: 8px; }\n  .editor .input-group:nth-child(n+1) {\n    margin-top: 4px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n", ""]);
+	exports.push([module.id, "h1 {\n  padding-left: 15px; }\n\nhr {\n  margin: 5px;\n  margin-bottom: 20px; }\n\n.box {\n  padding-left: 24px;\n  padding-top: 18px;\n  margin-right: 150px; }\n  .box hr {\n    margin-bottom: 10px; }\n  .box .question {\n    font-size: 1.3em;\n    padding-left: 8px; }\n  .box .description {\n    margin-bottom: 5px;\n    margin-left: 15px;\n    font-size: 1em;\n    color: gray;\n    padding-left: 8px; }\n  .box .hover:hover {\n    cursor: pointer;\n    color: #002FC2;\n    background: linear-gradient(to right, #D8E2FF, white);\n    border-radius: 5px; }\n  .box .edit {\n    padding-left: 15px;\n    padding-right: 15px; }\n  .box .re-order {\n    float: right; }\n\n.editor {\n  width: 700px;\n  margin: 5px 100px 10px 25px; }\n  .editor form > label {\n    margin-bottom: 0px; }\n  .editor .form-group {\n    margin-bottom: 8px; }\n  .editor .input-group:nth-child(n+1) {\n    margin-top: 4px; }\n\n#form-sheet .add {\n  margin-left: 28px;\n  margin-top: 10px;\n  padding: 5px 10px; }\n\n/*********************************************/\n/*********************************************/\n/*********************************************/\n/*********************************************/\n.float-right {\n  position: absolute; }\n\n#extraDetails {\n  width: 200px; }\n", ""]);
 
 	// exports
 
@@ -21999,17 +21999,23 @@
 	        0: {
 	          question: 'This is a quick and easy form builder! You can add, remove, and edit dialog.',
 	          description: '',
-	          editor: false
+	          editor: false,
+	          options: '',
+	          extra: ''
 	        },
 	        1: {
 	          question: 'The 12 Ball Problem',
 	          description: 'There are 12 balls. All the balls appear identical to each other, but one of them has a different weight. How many weighings with a balance scale is needed to figure out which ball is the counterfeit AND determine if it\'s heavier or lighter than the other 11 balls?',
-	          editor: false
+	          editor: false,
+	          options: '',
+	          extra: ''
 	        },
 	        2: {
 	          question: 'What is your favorite joke of all times?',
 	          description: 'Example: There\'s a band called 1023MB. They haven\'t had any gigs yet.',
-	          editor: false
+	          editor: false,
+	          options: '',
+	          extra: ''
 	        }
 	      },
 	      count: [0, 1, 2]
@@ -22032,12 +22038,14 @@
 	    }
 	  }, {
 	    key: 'edit',
-	    value: function edit(question, description, i) {
+	    value: function edit(question, description, i, options, extra) {
 	      /* Updates the dialog according to the user's edit */
 	      var newDialog = Object.assign({}, this.state.dialog);
 	      newDialog[i].question = question;
 	      newDialog[i].description = description;
 	      newDialog[i].editor = false;
+	      newDialog[i].options = options;
+	      newDialog[i].extra = extra;
 	      this.setState({ dialog: newDialog });
 	    }
 	  }, {
@@ -22087,6 +22095,7 @@
 	        this.state.count.map(function (i) {
 	          return _react2.default.createElement(_Box2.default, { question: _this2.state.dialog[i].question.trim() || 'Edit me!',
 	            description: _this2.state.dialog[i].description,
+	            dialog: _this2.state.dialog[i],
 	            key: i, position: i,
 	            edit: _this2.edit.bind(_this2),
 	            'delete': _this2.delete.bind(_this2),
@@ -22174,7 +22183,18 @@
 	            'div',
 	            { className: 'small description hover' },
 	            this.props.description || ''
-	          )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'small' },
+	            this.props.dialog.options === 'Options' ? 'No option selected' : this.props.dialog.options
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'small' },
+	            this.props.dialog.extra
+	          ),
+	          _react2.default.createElement('div', null)
 	        ),
 	        !this.props.stateEditor ? null : _react2.default.createElement(_Editor2.default, { defaultQ: this.props.question,
 	          defaultD: this.props.description,
@@ -22270,7 +22290,9 @@
 
 	    _this.state = {
 	      question: '',
-	      description: ''
+	      description: '',
+	      options: 'Options',
+	      extra: ''
 	    };
 	    return _this;
 	  }
@@ -22287,7 +22309,7 @@
 	    key: 'confirm',
 	    value: function confirm(e) {
 	      e.preventDefault();
-	      this.props.edit(this.state.question, this.state.description, this.props.position);
+	      this.props.edit(this.state.question, this.state.description, this.props.position, this.state.options, this.state.extra);
 	      this.props.hide(this.props.position);
 	    }
 	  }, {
@@ -22299,6 +22321,20 @@
 	    key: 'editDescription',
 	    value: function editDescription(e) {
 	      this.setState({ description: e.target.value });
+	    }
+	  }, {
+	    key: 'editExtra',
+	    value: function editExtra(e) {
+	      this.setState({
+	        extra: e.target.value
+	      });
+	    }
+	  }, {
+	    key: 'changeOption',
+	    value: function changeOption(option) {
+	      this.setState({
+	        options: option
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -22331,7 +22367,94 @@
 	                defaultValue: this.props.defaultQ,
 	                placeholder: 'Edit me!',
 	                id: 'edit-question',
-	                onChange: this.editQuestion.bind(this) })
+	                onChange: this.editQuestion.bind(this) }),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'input-group-btn' },
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'button',
+	                    className: 'btn btn-default dropdown-toggle',
+	                    'data-toggle': 'dropdown',
+	                    'aria-haspopup': 'true',
+	                    'aria-expanded': 'false' },
+	                  this.state.options,
+	                  ' ',
+	                  _react2.default.createElement('span', { className: 'caret' })
+	                ),
+	                _react2.default.createElement(
+	                  'ul',
+	                  { className: 'dropdown-menu' },
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    _react2.default.createElement(
+	                      'a',
+	                      { href: '#', onClick: function onClick() {
+	                          return _this2.changeOption('Example 1');
+	                        } },
+	                      'Example 1'
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    _react2.default.createElement(
+	                      'a',
+	                      { href: '#', onClick: function onClick() {
+	                          return _this2.changeOption('Example 2');
+	                        } },
+	                      'Example 2'
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    _react2.default.createElement(
+	                      'a',
+	                      { href: '#', onClick: function onClick() {
+	                          return _this2.changeOption('Example 3');
+	                        } },
+	                      'Example 3'
+	                    )
+	                  ),
+	                  _react2.default.createElement('li', { role: 'separator', className: 'divider' }),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    _react2.default.createElement(
+	                      'a',
+	                      { href: '#', onClick: function onClick() {
+	                          return _this2.changeOption('Option A');
+	                        } },
+	                      'Option A'
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    _react2.default.createElement(
+	                      'a',
+	                      { href: '#', onClick: function onClick() {
+	                          return _this2.changeOption('Option B');
+	                        } },
+	                      'Option B'
+	                    )
+	                  )
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'input-group float-right' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'input-group-addon' },
+	                  'Extra details'
+	                ),
+	                _react2.default.createElement('input', { className: 'form-control',
+	                  id: 'extraDetails',
+	                  onChange: this.editExtra.bind(this) })
+	              )
 	            ),
 	            _react2.default.createElement(
 	              'div',
